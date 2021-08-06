@@ -1,0 +1,102 @@
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+Handlowiec
+{% endblock %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+{% endblock %}
+
+
+{% block content %}
+{% get_current_language as LANGUAGE_CODE %}
+
+
+<title>{% block Pracownicy %}{% endblock %}</title>
+
+<section>
+    {% if test|length == 0 %}
+    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+        <div>
+            <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="user"></i>BRAK TAKIEGO NUMERU W BAZIE</h4> 
+        </div>   
+    </div>      
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button class="btn btn-primary" onclick="location.href='{% url 'sheet:submit' %}'">
+                Powrót do Wyszukiwania
+            </button>
+        </form>
+    </div>
+
+    {% else %}
+   
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table id="dataTableExample" class="table table-centered td-center">
+                    {% for item in test %}
+                        <thead>
+                            <tr>
+                                <th scope="col"><h3 class="mb-3 mb-md-0">DANE PRACOWNIKA</h3></th>
+                            </tr>    
+                            <tr>
+                                <th scope="col">Imię</th>
+                                <td>{{ item.first_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Nazwisko</th>
+                                <td> {{ item.last_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Oddział</th>
+                                <td> {{ item.sales_branch.full_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Rejon</th>
+                                <td> {{ item.area }}</td> 
+                            </tr>
+                            <tr>
+                                <th scope="col">Stanowisko</th>
+                                <td> {{ item.position }}</td> 
+                            </tr>
+                            <tr>
+                                <th scope="col">Telefon do Przełożonego</th>
+                                <td> {{ item.supervisor }}</td> 
+                            </tr>
+                            <tr>
+                                <th scope="col">Telefon</th>
+                                <td> {{ item.phone_number }}</td> 
+                            </tr>
+                            <tr>
+                                <th scope="col">Adres Email</th>
+                                <td> {{ item.email }}</td> 
+                            </tr>
+                            <tr>
+                                <th scope="col">Identyfikator</th>
+                                <td> {{item.sales_branch }}-{{ item.id_number }}</td> 
+                            </tr>
+                        </thead>
+                    {% endfor %}
+                    </table>
+                    </br>
+                    <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        <button class="btn btn-primary" onclick="location.href='{% url 'sheet:submit' %}'">
+                            Powrót do Wyszukiwania
+                        </button>
+                    </form>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock content %}

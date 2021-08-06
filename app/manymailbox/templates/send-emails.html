@@ -1,0 +1,26 @@
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+Wyślij emaile
+{% endblock %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+{% get_current_language as LANGUAGE_CODE %}
+    <script>
+       setTimeout(function(){
+            window.location.href = '/manymailbox/all-emails';
+         }, 5);
+   </script>
+</head>
+<body>
+</body>
+
+{% endblock content %}

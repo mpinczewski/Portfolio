@@ -1,0 +1,74 @@
+{% load i18n %}
+
+{% block title %}
+Dodaj Handlowca
+{% endblock %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block content %}
+
+<section>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="users"></i> Dane Handlowca</h4> 
+            <div class="card-body">
+                <div class="table-responsive">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <table border="0">
+                            <tr>
+                                <th>{{ form.first_name.label_tag }}</th>
+                                <td>{{ form.first_name }}</td>
+                                <td>{{ form.first_name.errors }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ form.last_name.label_tag }}</th>
+                                <td>{{ form.last_name }}</td>
+                                <td>{{ form.last_name.errors }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ form.sales_branch.label_tag }}</th>
+                                <td>{{ form.sales_branch }}</td>
+                                <td>{{ form.sales_branch.errors }}</td>                                    
+                            </tr>
+                            <tr>
+                                <th>{{ form.area.label_tag }}</th>
+                                <td>{{ form.area }}</td>
+                                <td>{{ form.area.errors }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ form.position.label_tag }}</th>
+                                <td>{{ form.position }}</td>
+                                <td>{{ form.position.errors }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ form.supervisor.label_tag }}</th>
+                                <td>{{ form.supervisor }}</td>
+                                <td>{{ form.supervisor.errors }}</td>
+                            </tr>   
+                            <tr>
+                                <th>{{ form.phone_number.label_tag }}</th>
+                                <td>{{ form.phone_number }}</td>
+                                <td>{{ form.phone_number.errors }}</td>
+                            </tr>    
+                            <tr>
+                                <th>{{ form.email.label_tag }}</th>
+                                <td>{{ form.email }}</td>
+                                <td>{{ form.email.errors }}</td>
+                            </tr>  
+                            <tr>
+                                <th>{{ form.is_active.label_tag }}</th>
+                                <td>{{ form.is_active }}</td>
+                            </tr>    
+                        </table>
+                        <button class="btn btn-primary" type="submit">Zapisz dane</button>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+

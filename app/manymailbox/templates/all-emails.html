@@ -1,0 +1,63 @@
+{% load i18n %}
+
+{% block title %}
+Emaile
+{% endblock %}
+
+
+
+{% block content %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<section>
+    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+        <div>
+            <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="users"></i> Wiadomości Email</h4> 
+        </div>    
+    </div>     
+</section>
+
+<section>
+    <button class="btn btn-primary" onclick="location.href='{% url 'manymailbox:check_emails' %}'">
+        Sprawdź skrzynki mailowe
+    </button>
+</section>
+
+</br>
+
+<section>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dataTableExample" class="table table-centered td-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Data wysłania</th>
+                                    <th scope="col">Nadawca</th>
+                                    <th scope="col">Odbiorca</th>
+                                    <th scope="col">Temat</th>
+                                    <th scope="col">Treść</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in test %}
+                                <tr>
+                                    <td> {{ item.send_date }}</td>
+                                    <td> {{ item.email_sender }}</td>
+                                    <td> {{ item.email_receiver }}</td>
+                                    <td> {{ item.subject|truncatewords:4 }}</td> 
+                                    <td> {{ item.email_body|truncatewords:6 }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>       
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Dodaj Oddziały
+{% endblock title%}
+
+{% block content %}
+<form action="" method="POST" class="ui form" enctype="multipart/form-data">
+    {% csrf_token %}}
+    {{form}}
+    <button type="submit" class="ui button primary">Potwierdź</button>
+</form>
+</br>
+    <button type="submit" class="ui button primary">
+        <a href="{% url 'sheet:all_traders' %}" id="myButton">Spis Handlowców</a>
+    </button>
+{% endblock content %}

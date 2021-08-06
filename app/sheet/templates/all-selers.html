@@ -1,0 +1,85 @@
+{% load i18n %}
+
+{% block title %}
+Handlowcy
+{% endblock %}
+
+
+{% block content %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<section>
+    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+        <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="users"></i> Dane Handlowców</h4>
+    </div>         
+</section>
+
+<section>
+    <button class="btn btn-primary" onclick="location.href='{% url 'sheet:submit' %}'">
+        Powrót do wyszukiwania
+    </button>
+    <button class="btn btn-primary" onclick="location.href='{% url 'sheet:upload_view' %}'">
+        Wczytaj plik z handlowcami
+    </button>
+    <button class="btn btn-primary" onclick="location.href='{% url 'sheet:upload_sales_branch_view' %}'">
+        Wczytaj plik z oddziałami
+    </button>
+    </br>    
+</section>
+</br>
+<section>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dataTableExample" class="table table-centered td-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Imię</th>
+                                    <th scope="col">Nazwisko</th>
+                                    <th scope="col">Oddział</th>
+                                    <th scope="col">Rejon</th>
+                                    <th scope="col">Stanowisko</th>
+                                    <th scope="col">Przełożony</th>
+                                    <th scope="col">Telefon</th>
+                                    <th scope="col">Adres Email</th>
+                                    <th scope="col">Identyfikator</th>
+                                    <th scope="col">Edycja</th>
+                                    <th scope="col">Usuwanie</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in test %}
+                                <tr>
+                                    <td>{{ item.first_name }}</td>
+                                    <td> {{ item.last_name }}</td>
+                                    <td> {{ item.sales_branch }}</td>
+                                    <td> {{ item.area }}</td> 
+                                    <td> {{ item.position }}</td>
+                                    <td> {{ item.supervisor }}</td>
+                                    <td> {{ item.phone_number }}</td>
+                                    <td> {{ item.email }}</td>
+                                    <td> {{ item.sales_branch.short_name }}-{{ item.id_number }}</td>
+                                    <td>
+                                        <form action="/sheet/add-sales-manager/{{ item.id_number }}/">
+                                            <input class="btn btn-primary" type="submit" value="Edytuj">
+                                        </form></td>
+                                    <td>
+                                        <form action="/sheet/delete-sales-manager/{{ item.id_number }}/">
+                                            <input class="btn btn-primary" type="submit" value="Usuń">
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>       
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+</section>
+
+{% endblock %}

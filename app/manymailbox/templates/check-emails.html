@@ -1,0 +1,25 @@
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+Sprawdź Emaile
+{% endblock %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{% get_current_language as LANGUAGE_CODE %}
+<head>
+    <script>
+       setTimeout(function(){
+            window.location.href = '/manymailbox/send-emails';
+         }, 5);
+    </script>
+</head>
+<body>
+</body>
+{% endblock content %}
