@@ -236,7 +236,7 @@
 # print(x)
 
 
-  
+import mailparser
 import imaplib
 import base64
 import os
@@ -247,23 +247,28 @@ email_user = "dobrytyp@op.pl"
 email_pass = "Onet2021"
 
 mail = imaplib.IMAP4_SSL("imap.poczta.onet.pl", 993)
-
 mail.login(email_user, email_pass)
-
 mail.select('Inbox')
 
 type, data = mail.search(None, 'ALL')
 mail_ids = data[0]
 id_list = mail_ids.split()
+# print(id_list)
+
+mail_list = []
 
 for num in data[0].split():
     typ, data = mail.fetch(num, '(RFC822)' )
     raw_email = data[0][1]
 
+
 # converts byte literal to string removing b''
     raw_email_string = raw_email.decode('utf-8')
-    rt = raw_email_string.encode('Windows-1250')
+    rt = raw_email_string.encode('utf-8')
     email_message = email.message_from_string(raw_email_string)
+    mail_list.append(email_message)
+    # print(rt)
 
-    print(email_message)
-    print(rt)
+for mail in mail_list:
+    email_subject = mail.subject
+    print(email_subject)
