@@ -37,7 +37,7 @@ class SalesManager(models.Model):
     email = models.EmailField()
     id_number = models.PositiveIntegerField()
     is_active = models.BooleanField(default=True)
-    photo = models.ImageField(upload_to='images', null=True, blank=True)
+    photo = models.ImageField(upload_to="images", null=True, blank=True)
 
     def __str__(self):
         return str(self.id_number)

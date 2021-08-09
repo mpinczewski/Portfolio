@@ -1,8 +1,6 @@
 from django.forms import ModelForm
-from .models import SalesManager
 
-
-from .models import Csv
+from .models import Csv, SalesManager
 
 
 class CsvModelForm(ModelForm):
@@ -36,5 +34,5 @@ class SalesManagerForm(ModelForm):
             "phone_number": "Numer pracownika",
             "email": "Email pracownika",
             "is_active": "Czy aktywny",
-            "photo": "Zdjęcie"
+            "photo": "Zdjęcie",
         }
