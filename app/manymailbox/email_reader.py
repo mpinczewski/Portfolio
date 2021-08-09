@@ -1,7 +1,4 @@
 import mailparser
-
-from django.shortcuts import render
-
 from .models import Mailbox, RecievedMail
 
 
@@ -33,6 +30,31 @@ def check_email_uidl(mailbox_counter, email_uidl):
     return email_uidl
 
 
+def parse_imap_mail_object(mailbox):
+    for mail in mailbox.fetch():
+        send_date = mail.date
+        email_subject = mail.subject
+        email_sender = mail.from_
+        email_receiver = mail.to
+        if len(email_receiver) != 0:  # chceck email parsing
+            email_receiver = email_receiver[0]  # tuple
+        email_body = mail.text
+        email_uidl = mail.uid
+
+        check_uidl_in_db = RecievedMail.objects.filter(email_uidl=email_uidl)
+        if len(check_uidl_in_db) == 0:
+            create_email_objects(
+                email_uidl,
+                send_date,
+                email_subject,
+                email_sender,
+                email_receiver,
+                email_body,
+            )
+        else:
+            pass
+
+
 def parse_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter):
     for i in range(mailcount):  # parse every email in box
         raw_email = b"\n".join(pop3server.retr(i + 1)[1])
@@ -46,12 +68,15 @@ def parse_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter):
         if len(email_receiver) != 0:  # chceck email parsing
             email_receiver = email_receiver[0]  # tuple
             email_receiver = email_receiver[1]  # receiver
-        email_body = mail.text_plain[0]  # body of email
+        print(mail.text_plain)
+        if len(mail.text_plain) == 0:
+            email_body = ""
+        else:
+            email_body = mail.text_plain[0]  # body of email
         email_body = encoding_error_debugger(email_body)
 
         email_uidl = emails_uidl[0]  # get uidl
         email_uidl = check_email_uidl(mailbox_counter, email_uidl)
-
         check_uidl_in_db = RecievedMail.objects.filter(email_uidl=email_uidl)
         if len(check_uidl_in_db) == 0:
             create_email_objects(

@@ -99,7 +99,7 @@ def find_trader(request):
 
 def find_trader_dok(request):
     if request.method == "POST":
-        
+
         pk_number = request.POST.get("fname")
         if pk_number is not None:
             try:
@@ -127,7 +127,6 @@ def find_trader_dok(request):
                     return render(request, "submit-dok.html")
 
     return render(request, "submit-dok.html")
-
 
 
 def add_sales_manager(request):

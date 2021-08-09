@@ -23,7 +23,6 @@ class EndPointTest(TestCase):
             is_active=True,
         )
 
-
     def test_all_traders_adress(self):
         all_traders_response = self.c.get("/sheet/all-traders/")
         self.assertEqual(all_traders_response.status_code, 200)
@@ -34,7 +33,6 @@ class EndPointTest(TestCase):
         specific_trader = all_traders_list[0]
         self.assertEqual(specific_trader.last_name, "Opania")
 
-
     def test_specific_trader_adress(self):
         specific_trader_response = self.c.get(
             f"/sheet/submit/{self.new_sales_manager.id_number}/"
@@ -44,7 +42,6 @@ class EndPointTest(TestCase):
         specific_trader_list = specific_trader_response.context["test"]
         specific_trader = specific_trader_list[0]
         self.assertEqual(specific_trader.last_name, "Opania")
-
 
     def test_add_sales_manager(self):
         add_sales_manager = self.c.post(
