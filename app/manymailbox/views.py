@@ -30,7 +30,7 @@ def check_mailboxes(request):
         password = mailbox.email_password
         if port == "993":  # imap server
             mailbox = MailBox(server, port).login(user, password)
-            parse_imap_mail_object(mailbox)
+            parse_imap_mail_object(mailbox, mailbox_counter)
 
         else:
             pop3server = poplib.POP3_SSL(server, port)

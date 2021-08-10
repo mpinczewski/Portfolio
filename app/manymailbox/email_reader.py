@@ -30,7 +30,7 @@ def check_email_uidl(mailbox_counter, email_uidl):
     return email_uidl
 
 
-def parse_imap_mail_object(mailbox):
+def parse_imap_mail_object(mailbox, mailbox_counter):
     for mail in mailbox.fetch():
         send_date = mail.date
         email_subject = mail.subject
@@ -41,6 +41,7 @@ def parse_imap_mail_object(mailbox):
         email_body = mail.text
         email_uidl = mail.uid
 
+        email_uidl = check_email_uidl(mailbox_counter, email_uidl)
         check_uidl_in_db = RecievedMail.objects.filter(email_uidl=email_uidl)
         if len(check_uidl_in_db) == 0:
             create_email_objects(
