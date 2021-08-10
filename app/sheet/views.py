@@ -116,11 +116,9 @@ def find_trader_dok(request):
 
             except ValueError:
                 data = str(pk_number.capitalize())
-                print(data)
                 try:
                     find_object = SalesManager.objects.filter(last_name=data)
                     pk = find_object[0]
-                    print(pk)
                     pk = pk.id_number
                     return specific_trader(request, pk)
                 except IndexError:

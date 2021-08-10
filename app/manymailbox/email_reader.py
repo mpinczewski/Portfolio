@@ -69,7 +69,6 @@ def parse_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter):
         if len(email_receiver) != 0:  # chceck email parsing
             email_receiver = email_receiver[0]  # tuple
             email_receiver = email_receiver[1]  # receiver
-        print(mail.text_plain)
         if len(mail.text_plain) == 0:
             email_body = ""
         else:
