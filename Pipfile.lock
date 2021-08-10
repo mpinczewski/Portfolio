@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "18d343f436f080720244b8944339332f725fce8b130fc6929197b7b79604eb9a"
+            "sha256": "07e2da798f12717513a792966478ab6e3112add83f425ac24c1f4f4d67ebf95b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -31,6 +31,14 @@
             ],
             "index": "pypi",
             "version": "==3.2.6"
+        },
+        "imap-tools": {
+            "hashes": [
+                "sha256:c24137a6ee519b4a22d8ee4fc8016f249453a2b67b3c03371311cc61c774de7b",
+                "sha256:d3cf1c1dc6e865ce126dfab8fa15fcd4ba2c7773b2ba980e1d6c124fe6444831"
+            ],
+            "index": "pypi",
+            "version": "==0.45.0"
         },
         "mail-parser": {
             "hashes": [
