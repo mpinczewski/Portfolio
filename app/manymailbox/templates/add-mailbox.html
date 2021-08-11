@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}
+Dodaj skrzynkę
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="users"></i> Dane skrzynki</h4> 
+            <div class="card-body">
+                <div class="table-responsive">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <table border="0">
+                            <tr>
+                                <th>{{ form.name.label_tag }}</th>
+                                <td>{{ form.name }}</td>
+                                <td>{{ form.name.errors }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ form.server.label_tag }}</th>
+                                <td>{{ form.server }}</td>
+                                <td>{{ form.server.errors }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ form.port.label_tag }}</th>
+                                <td>{{ form.port }}</td>
+                                <td>{{ form.port.errors }}</td>                                    
+                            </tr>
+                            <tr>
+                                <th>{{ form.area.label_tag }}</th>
+                                <td>{{ form.area }}</td>
+                                <td>{{ form.area.errors }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ form.email_user.label_tag }}</th>
+                                <td>{{ form.email_user }}</td>
+                                <td>{{ form.email_user.errors }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ form.email_password.label_tag }}</th>
+                                <td>{{ form.email_password }}</td>
+                                <td>{{ form.email_password.errors }}</td>
+                            </tr>   
+                        </table>
+                        <button class="btn btn-primary" style="background-color: #e99245;" type="submit">Zapisz dane</button>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

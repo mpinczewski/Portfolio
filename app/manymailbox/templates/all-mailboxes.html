@@ -3,12 +3,14 @@
 {% load i18n %}
 
 {% block title %}
-Emaile
+Skrzynki Pocztowe
 {% endblock %}
+
 
 {% block content %}
 
 {% get_current_language as LANGUAGE_CODE %}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
@@ -21,7 +23,6 @@ Emaile
     });
 </script>
 
-
 <section>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
@@ -32,28 +33,39 @@ Emaile
                             <input style="border-color: #e99245;" id="myInput" type="text" placeholder="Search..">
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="users"></i> Wiadomości Email</h4>
+                            <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="users"></i>Dane Skrzynek mailowych</h4>
                         </div>
                     </div>
                     <div class="table-responsive">
                         <table id="dataTableExample" class="table table-centered td-center">
                             <thead>
                                 <tr>
-                                    <th scope="col">Data wysłania</th>
-                                    <th scope="col">Nadawca</th>
-                                    <th scope="col">Odbiorca</th>
-                                    <th scope="col">Temat</th>
-                                    <th scope="col">Treść</th>
+                                    <th scope="col">Nazwa</th>
+                                    <th scope="col">Serwer</th>
+                                    <th scope="col">Port</th>
+                                    <th scope="col">Adres Email</th>
+                                    <th scope="col">Hasło</th>
+                                    <th scope="col">Edytuj</th>
+                                    <th scope="col">Usuń</th>
                                 </tr>
                             </thead>
                             <tbody id="myTable">
                                 {% for item in test %}
                                 <tr>
-                                    <td> {{ item.send_date }}</td>
-                                    <td> {{ item.email_sender }}</td>
-                                    <td> {{ item.email_receiver }}</td>
-                                    <td> {{ item.subject|truncatewords:4 }}</td> 
-                                    <td> {{ item.email_body|truncatewords:6 }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td> {{ item.server }}</td>
+                                    <td> {{ item.port }}</td>
+                                    <td> {{ item.email_user }}</td> 
+                                    <td> {{ item.email_password }}</td>
+                                    <td>
+                                        <form action="/manymailbox/add-mailbox/{{ item.id }}/">
+                                            <input class="btn btn-primary" style="background-color: #e99245;" type="submit" value="Edytuj">
+                                        </form></td>
+                                    <td>
+                                        <form action="/manymailbox/delete-mailbox/{{ item.id }}/">
+                                            <input class="btn btn-primary" style="background-color: #e99245;" type="submit" value="Usuń">
+                                        </form>
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>       
@@ -64,4 +76,5 @@ Emaile
         </div>
      </div>
 </section>
-{% endblock content %}
+
+{% endblock %}
