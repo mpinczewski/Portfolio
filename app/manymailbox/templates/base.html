@@ -14,7 +14,7 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e99245;"  >
-    <a class="navbar-brand" onclick="location.href='{% url 'manymailbox:all_emails' %}'">ManyMailBox</a>
+    <a class="navbar-brand" onclick="location.href='{% url 'manymailbox:all_emails' %}'"><h4>ManyMailBox</h4></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,7 @@
         </button>
         </div>  
     </div>    
-        <div class="sidebar-header">
+    <div class="sidebar-header">
         <div class="sidebar-brand">
         </br>
         <button class="btn btn-primary" style="background-color: #e99245;width: 15%" onclick="location.href='{% url 'manymailbox:all_emails' %}'">
@@ -46,7 +46,16 @@
         </button>
         </div>  
     </div> 
+    <div class="sidebar-header">
+        <div class="sidebar-brand">
+        </br>
+        <button class="btn btn-primary" style="background-color: #e99245;width: 15%" onclick="location.href='{% url 'manymailbox:all_mailboxes' %}'">
+        Pokaż dodane skrzynki
+        </button>
+        </div>  
+    </div>
 </nav>
+
     
 
 <div class="container">

@@ -21,47 +21,48 @@ Emaile
     });
 </script>
 
-
-<section>
-    <div class="row">
-        <div class="col-md-12 grid-margin stretch-card">
-            <div class="card" style="border-color: #e99245;">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-4">
-                            <input style="border-color: #e99245;" id="myInput" type="text" placeholder="Search..">
+<body>
+    <section>
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card" style="border-color: #e99245;background-color: #f7eee8;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4">
+                                <input style="border-color: #e99245;" id="myInput" type="text" placeholder="Search..">
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="users"></i> Wiadomości Email</h4>
+                            </div>
                         </div>
-                        <div class="col-sm-12 col-md-6">
-                            <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="users"></i> Wiadomości Email</h4>
+                        <div class="table-responsive">
+                            <table id="dataTableExample" class="table table-centered td-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Data wysłania</th>
+                                        <th scope="col">Nadawca</th>
+                                        <th scope="col">Odbiorca</th>
+                                        <th scope="col">Temat</th>
+                                        <th scope="col">Treść</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="myTable">
+                                    {% for item in test %}
+                                    <tr>
+                                        <td> {{ item.send_date }}</td>
+                                        <td> {{ item.email_sender }}</td>
+                                        <td> {{ item.email_receiver }}</td>
+                                        <td> {{ item.subject|truncatewords:4 }}</td> 
+                                        <td> {{ item.email_body|truncatewords:6 }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>       
+                            </table>
                         </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table id="dataTableExample" class="table table-centered td-center">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Data wysłania</th>
-                                    <th scope="col">Nadawca</th>
-                                    <th scope="col">Odbiorca</th>
-                                    <th scope="col">Temat</th>
-                                    <th scope="col">Treść</th>
-                                </tr>
-                            </thead>
-                            <tbody id="myTable">
-                                {% for item in test %}
-                                <tr>
-                                    <td> {{ item.send_date }}</td>
-                                    <td> {{ item.email_sender }}</td>
-                                    <td> {{ item.email_receiver }}</td>
-                                    <td> {{ item.subject|truncatewords:4 }}</td> 
-                                    <td> {{ item.email_body|truncatewords:6 }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>       
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
-     </div>
-</section>
+    </section>
+</body>
 {% endblock content %}
