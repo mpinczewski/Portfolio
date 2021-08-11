@@ -1,12 +1,14 @@
 import imaplib
 import poplib
 import email
+
+from django.http.response import HttpResponseRedirect
 from imap_tools import MailBox
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.core.mail import send_mail
 
-from .email_reader import parse_mail_object, parse_imap_mail_object
+from .email_reader import parse_pop_mail_object, parse_imap_mail_object
 from .models import (
     DestinationInbox,
     Mailbox,
@@ -29,8 +31,11 @@ def check_mailboxes(request):
         user = mailbox.email_user
         password = mailbox.email_password
         if port == "993":  # imap server
-            mailbox = MailBox(server, port).login(user, password)
-            parse_imap_mail_object(mailbox, mailbox_counter)
+            try:
+                mailbox = MailBox(server, port).login(user, password)
+                parse_imap_mail_object(mailbox, mailbox_counter)
+            except imaplib.IMAP4.error:
+                return render(request, "access-denied.html")
 
         else:
             pop3server = poplib.POP3_SSL(server, port)
@@ -42,7 +47,7 @@ def check_mailboxes(request):
                 pop3server
             )  # # Find Unique ID Listing
             emails_uidl = bytes_emails_uidl[1]  # tuple of list -> list
-            parse_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter)
+            parse_pop_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter)
 
     return render(request, "check-emails.html")
 
@@ -77,3 +82,7 @@ def send_emails(request):
         update_email_object.save()
 
     return render(request, "send-emails.html")
+
+
+def access_denied(request):
+    return render(request, "access-denied.html")

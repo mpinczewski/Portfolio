@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}
+Błąd Pobierania
+{% endblock %}
+
+{% block content %}
+</br>
+<h4>Jedna lub więcej z twoich skrzynek odmówiła nam dostępu.</h4>
+</br>
+Jeśli na twojej liście skrzynek jest poczta Gmail, 
+</br>
+zaloguj się i zaznacz opcje "Włącz dostęp mniej bezpiecznym aplikacjom" w ustawieniach konta:
+<p>
+
+<section>
+    <button class="btn btn-primary" onclick="location.href='https://myaccount.google.com/intro/security'">
+        Ustawienia bezpieczeństwa Konta Google
+    </button>
+</section>
+
+{% endblock %}
