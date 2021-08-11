@@ -40,6 +40,7 @@ def parse_imap_mail_object(mailbox, mailbox_counter):
             email_receiver = email_receiver[0]  # tuple
         email_body = mail.text
         email_uidl = mail.uid
+        email_body = encoding_error_debugger(email_body)
 
         email_uidl = check_email_uidl(mailbox_counter, email_uidl)
         check_uidl_in_db = RecievedMail.objects.filter(email_uidl=email_uidl)
