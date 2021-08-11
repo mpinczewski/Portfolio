@@ -32,18 +32,22 @@ def check_email_uidl(mailbox_counter, email_uidl):
 
 def parse_imap_mail_object(mailbox, mailbox_counter):
     for mail in mailbox.fetch():
-        send_date = mail.date
-        email_subject = mail.subject
-        email_sender = mail.from_
-        email_receiver = mail.to
+        send_date = mail.date  # when email was sent
+        email_subject = mail.subject  # email subject
+        email_sender = mail.from_  # from whom
+        email_receiver = mail.to  # to whom
         if len(email_receiver) != 0:  # chceck email parsing
             email_receiver = email_receiver[0]  # tuple
-        email_body = mail.text
-        email_uidl = mail.uid
-        email_body = encoding_error_debugger(email_body)
+        email_body = mail.text  # email body
+        email_uidl = mail.uid  # email uid
+        email_body = encoding_error_debugger(email_body)  # check decoding errors
 
-        email_uidl = check_email_uidl(mailbox_counter, email_uidl)
-        check_uidl_in_db = RecievedMail.objects.filter(email_uidl=email_uidl)
+        email_uidl = check_email_uidl(
+            mailbox_counter, email_uidl
+        )  # unique uid for many malibox
+        check_uidl_in_db = RecievedMail.objects.filter(
+            email_uidl=email_uidl
+        )  # check uid in DB
         if len(check_uidl_in_db) == 0:
             create_email_objects(
                 email_uidl,
@@ -57,7 +61,7 @@ def parse_imap_mail_object(mailbox, mailbox_counter):
             pass
 
 
-def parse_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter):
+def parse_pop_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter):
     for i in range(mailcount):  # parse every email in box
         raw_email = b"\n".join(pop3server.retr(i + 1)[1])
         mail = mailparser.parse_from_bytes(raw_email)  # parse email data

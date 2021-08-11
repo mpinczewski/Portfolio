@@ -6,7 +6,7 @@ from imap_tools import MailBox
 from django.shortcuts import render
 from django.core.mail import send_mail
 
-from .email_reader import parse_mail_object, parse_imap_mail_object
+from .email_reader import parse_pop_mail_object, parse_imap_mail_object
 from .models import (
     DestinationInbox,
     Mailbox,
@@ -42,7 +42,7 @@ def check_mailboxes(request):
                 pop3server
             )  # # Find Unique ID Listing
             emails_uidl = bytes_emails_uidl[1]  # tuple of list -> list
-            parse_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter)
+            parse_pop_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter)
 
     return render(request, "check-emails.html")
 
