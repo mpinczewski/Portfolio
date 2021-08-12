@@ -5,15 +5,59 @@ import email
 from django.http.response import HttpResponseRedirect
 from imap_tools import MailBox
 
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.core.mail import send_mail
 
+from .forms import MailboxForm
 from .email_reader import parse_pop_mail_object, parse_imap_mail_object
 from .models import (
     DestinationInbox,
     Mailbox,
     RecievedMail,
 )
+
+
+def add_mailbox(request):
+    # id_number = unique_sales_manager_id()
+    if request.method == "POST":
+        form = MailboxForm(request.POST, request.FILES or None)
+        if form.is_valid():
+            post = form.save(commit=False)
+            # post.id_number = id_number
+            post.save()
+            return redirect("/manymailbox/all-emails/")
+    else:
+        form = MailboxForm()
+
+    return render(request, "add-mailbox.html", {"form": form})
+
+
+def all_mailboxes(request):
+    mailbox = Mailbox.objects.all()
+    return render(request, "all-mailboxes.html", {"test": mailbox})
+
+
+def edit_mailbox(request, id):
+    instance = get_object_or_404(Mailbox, id=id)
+    form = MailboxForm(data=request.POST or None, instance=instance)
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect("/manymailbox/all-mailboxes/")
+
+    return render(request, "add-mailbox.html", {"form": form})
+
+
+def delete_mailbox(request, id):
+    instance = get_object_or_404(Mailbox, id=id)
+    form = MailboxForm(data=request.POST or None, instance=instance)
+
+    if request.method == "POST":
+        instance.delete()
+        return redirect("/manymailbox/all-mailboxes/")
+
+    return render(request, "delete-mailbox.html", {"form": form})
 
 
 def all_emails(request):

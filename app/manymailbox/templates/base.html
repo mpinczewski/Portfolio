@@ -10,16 +10,52 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>{% block title %}{% endblock %}</title>
-</head>
+</head> 
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #DC143C;">
-    <a class="navbar-brand" onclick="location.href='{% url 'manymailbox:all_emails' %}'">ManyMailBox</a>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e99245;"  >
+    <a class="navbar-brand" onclick="location.href='{% url 'manymailbox:all_emails' %}'"><h4>ManyMailBox</h4></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     
 </nav>
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-brand">
+        </br>
+        <button class="btn btn-primary" style="background-color: #e99245;width: 15%" onclick="location.href='{% url 'manymailbox:check_emails' %}'">
+        Sprawdź skrzynki mailowe 
+        </button>
+        </div>  
+    </div>   
+    <div class="sidebar-header">
+        <div class="sidebar-brand">
+        </br>
+        <button class="btn btn-primary" style="background-color: #e99245;width: 15%" onclick="location.href='{% url 'manymailbox:add_mailbox' %}'">
+        Dodaj Skrzynkę mailową 
+        </button>
+        </div>  
+    </div>    
+    <div class="sidebar-header">
+        <div class="sidebar-brand">
+        </br>
+        <button class="btn btn-primary" style="background-color: #e99245;width: 15%" onclick="location.href='{% url 'manymailbox:all_emails' %}'">
+        Pokaż Wiadomości
+        </button>
+        </div>  
+    </div> 
+    <div class="sidebar-header">
+        <div class="sidebar-brand">
+        </br>
+        <button class="btn btn-primary" style="background-color: #e99245;width: 15%" onclick="location.href='{% url 'manymailbox:all_mailboxes' %}'">
+        Pokaż dodane skrzynki
+        </button>
+        </div>  
+    </div>
+</nav>
+
     
 
 <div class="container">
@@ -37,8 +73,10 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 </body>
 </html>
+
