@@ -8,14 +8,29 @@ Błąd Pobierania
 
 {% block content %}
 </br>
-<h4>Nie udało nam się połączyć z twoją skrzynką pocztową.</h4>
+<h4>Nie udało nam się połączyć z 
+</br>
+nastepującą skrzynką pocztową.</h4>
 </br>
 <h5>{{ user }}</h5>
-{% comment %} <h5>{{ id }}</h5> {% endcomment %}
 </br>
-Może to być spowodowane błędnie podanymi danymi logowania. 
+Jeśli jest to skrzynka Gmail, zaloguj się  
 </br>
-Spróbuj poporawić dane lub usuń te skrzynkę:
+i w ustawieniach konta zaznacz: <h6 style="color:blue">"Włącz dostęp"</h6>
+W pozycji: 
+<h6 style="color:blue">"Dostęp mniej bezpiecznych aplikacji"</h6>
+
+
+
+<section>
+    <button class="btn btn-primary" style="background-color: #e99245;" onclick="location.href='https://myaccount.google.com/intro/security'">
+        Ustawienia bezpieczeństwa Konta Google
+    </button>
+</section>
+</br>
+Jeżeli problem wystepuje nadal, spróbuj poprawić 
+</br>
+wprowadzone dane lub usuń te skrzynkę:
 <p>
 
 <section>
