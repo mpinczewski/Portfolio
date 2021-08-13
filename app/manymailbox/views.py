@@ -65,6 +65,10 @@ def all_emails(request):
     return render(request, "all-emails.html", {"test": emails})
 
 
+def login_errors(request):
+    return render(request, "errors.html")
+
+
 def check_mailboxes(request):
     mailbox_counter = -1
     mailboxes = Mailbox.objects.all()
@@ -82,17 +86,19 @@ def check_mailboxes(request):
                 return render(request, "access-denied.html")
 
         else:
-            pop3server = poplib.POP3_SSL(server, port)
-            pop3server.user(user)
-            pop3server.pass_(password)
-            pop3info = pop3server.stat()
-            mailcount = pop3info[0]
-            bytes_emails_uidl = poplib.POP3_SSL.uidl(
-                pop3server
-            )  # # Find Unique ID Listing
-            emails_uidl = bytes_emails_uidl[1]  # tuple of list -> list
-            parse_pop_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter)
-
+            try:
+                pop3server = poplib.POP3_SSL(server, port)
+                pop3server.user(user)
+                pop3server.pass_(password)
+                pop3info = pop3server.stat()
+                mailcount = pop3info[0]
+                bytes_emails_uidl = poplib.POP3_SSL.uidl(
+                    pop3server
+                )  # # Find Unique ID Listing
+                emails_uidl = bytes_emails_uidl[1]  # tuple of list -> list
+                parse_pop_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter)
+            except TimeoutError:
+                return render(request, "errors.html")
     return render(request, "check-emails.html")
 
 

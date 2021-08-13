@@ -13,17 +13,17 @@ Usuń Handlowca
 <section>
     <div class="row">
         <div class="col-md-6">
-            <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="users"></i> Dane Handlowca</h4> 
+            <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="users"></i> Usunicie skrzynki</h4> 
             </br>
             <h5 class="mb-3 mb-md-0">
-                UWAGA operacja jest nieodwracalna.
+                UWAGA Jeśli nie masz zapisanych danych do konfiguracji skrzynki, stracisz je.
             </br>
             </br>CZY CHCESZ KONTYNUOWAĆ?</h5>
                 <div class="card-body">
                     <div class="table-responsive">
                         <form method="post" novalidate>
                             {% csrf_token %}
-                            <button class="btn btn-primary" type="submit">Usuń Konto</button>
+                            <button class="btn btn-primary" type="submit">Usuń skrzynkę</button>
                         </form> 
                     </div>
                 </div>

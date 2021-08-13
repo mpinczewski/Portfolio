@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import access_denied, add_mailbox, all_mailboxes, delete_mailbox, edit_mailbox, all_emails, send_emails, check_mailboxes
+from .views import access_denied, add_mailbox, all_mailboxes, delete_mailbox, edit_mailbox, all_emails, login_errors, send_emails, check_mailboxes
 
 app_name = "manymailbox"
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path("add-mailbox/", add_mailbox, name="add_mailbox"),
     path("add-mailbox/<int:id>/", edit_mailbox, name="edit_mailbox"),
     path("delete-mailbox/<int:id>/", delete_mailbox, name="delete_mailbox"),
+    path("errors/", login_errors, name="login_errors"),
 ]

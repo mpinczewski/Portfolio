@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}
+Błąd Pobierania
+{% endblock %}
+
+{% block content %}
+</br>
+<h4>Nie udało nam się połączyć z twoją skrzynką pocztową.</h4>
+</br>
+Może to być spowodowane błędnie podanymi danymi logowania. 
+</br>
+Spróbuj poporawić dane lub usuń te skrzynkę:
+<p>
+
+<section>
+    <button class="btn btn-primary" onclick="location.href='https://myaccount.google.com/intro/security'">
+        Ustawienia bezpieczeństwa Konta Google
+    </button>
+</section>
+
+{% endblock %}
