@@ -64,8 +64,9 @@ def all_emails(request):
 
 
 def login_errors(request, user):
-    print(user)
+    print(f"login_error user: {user}")
     obj = Mailbox.objects.get(email_user=user)
+    print(f"obj: {obj}")
     id = obj.id
     return render(request, "errors.html", {"user": user, "id": id})
 
@@ -89,7 +90,7 @@ def connect_imap_server(request, mailbox, mailbox_counter):
         return render(request, "errors.html", {"user": user})
 
 
-def connect_pop_server(request, mailbox, mailbox_counter):
+def connect_pop_server(mailbox, mailbox_counter):
     server = mailbox.server
     port = mailbox.port
     user = mailbox.email_user
@@ -107,10 +108,14 @@ def connect_pop_server(request, mailbox, mailbox_counter):
         parse_pop_mail(mailcount, pop3server, emails_uidl, mailbox_counter)
     except TimeoutError:
         print("TimeoutError")
-        return render(request, "errors.html", {"user": user})
+        errors = True
+        return errors
     except error_proto:
-        print("error_proto")
-        return login_errors(request, user)
+        errors = True
+        return errors
+    except ConnectionRefusedError:
+        errors = True
+        return errors
 
 
 def check_mailboxes(request):
@@ -123,12 +128,15 @@ def check_mailboxes(request):
         if port == "993":  # imap server
             mailbox_counter += 1
             connect_imap_server(request, mailbox, mailbox_counter)
+            
         elif port == "995":
             mailbox_counter += 1
-            connect_pop_server(request, mailbox, mailbox_counter)
+            check_errors = connect_pop_server(mailbox, mailbox_counter)
+            if check_errors == True:
+                return login_errors(request, user)
         else:
             mailbox_counter += 1
-            return render(request, "errors.html", {"user": user})
+            return login_errors(request, user)
 
     return render(request, "check-emails.html", {"user": user})
 
