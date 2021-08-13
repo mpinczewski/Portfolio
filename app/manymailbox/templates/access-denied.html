@@ -8,15 +8,19 @@ Błąd Pobierania
 
 {% block content %}
 </br>
-<h4>Jedna lub więcej z twoich skrzynek odmówiła nam dostępu.</h4>
+<h4>Poniższa skrzynka odmówiła nam dostępu:</h4>
 </br>
-Jeśli na twojej liście skrzynek jest poczta Gmail, 
+<h5>{{ user }}</h5>
 </br>
-zaloguj się i zaznacz opcje "Włącz dostęp mniej bezpiecznym aplikacjom" w ustawieniach konta:
+Jeśli jest to skrzynka Gmail, zaloguj się i w 
+</br>
+ustawieniach konta zaznacz: <h6 style="color:blue">"Włącz dostęp"</h6>
+W pozycji: 
+<p style="color:blue">"Dostęp mniej bezpiecznych aplikacji"</p>
 <p>
 
 <section>
-    <button class="btn btn-primary" onclick="location.href='https://myaccount.google.com/intro/security'">
+    <button class="btn btn-primary" style="background-color: #e99245;" onclick="location.href='https://myaccount.google.com/intro/security'">
         Ustawienia bezpieczeństwa Konta Google
     </button>
 </section>
