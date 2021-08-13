@@ -1,5 +1,57 @@
+import imaplib
+import poplib
+from poplib import error_proto
+from socket import gaierror
+
 import mailparser
+from imap_tools import MailBox
+
 from .models import Mailbox, RecievedMail
+
+
+def connect_imap_server(mailbox, mailbox_counter):
+    server = mailbox.server
+    port = mailbox.port
+    user = mailbox.email_user
+    password = mailbox.email_password
+    try:
+        mailbox = MailBox(server, port).login(user, password)
+        parse_imap_mail_object(mailbox, mailbox_counter)
+    except imaplib.IMAP4.error:
+        errors = True
+        return errors
+    except gaierror:
+        errors = True
+        return errors
+    except TimeoutError:
+        errors = True
+        return errors
+
+
+def connect_pop_server(mailbox, mailbox_counter):
+    server = mailbox.server
+    port = mailbox.port
+    user = mailbox.email_user
+    password = mailbox.email_password
+    try:
+        pop3server = poplib.POP3_SSL(server, port)
+        pop3server.user(user)
+        pop3server.pass_(password)
+        pop3info = pop3server.stat()
+        mailcount = pop3info[0]  # how many mails
+        bytes_emails_uidl = poplib.POP3_SSL.uidl(pop3server)  # Find Unique ID Listing
+        emails_uidl = bytes_emails_uidl[1]  # tuple of list -> list
+        parse_pop_mail(mailcount, pop3server, emails_uidl, mailbox_counter)
+    except TimeoutError:
+        print("TimeoutError")
+        errors = True
+        return errors
+    except error_proto:
+        errors = True
+        return errors
+    except ConnectionRefusedError:
+        errors = True
+        return errors
 
 
 def encoding_error_debugger(email_body):
@@ -61,7 +113,7 @@ def parse_imap_mail_object(mailbox, mailbox_counter):
             pass
 
 
-def parse_pop_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter):
+def parse_pop_mail(mailcount, pop3server, emails_uidl, mailbox_counter):
     for i in range(mailcount):  # parse every email in box
         raw_email = b"\n".join(pop3server.retr(i + 1)[1])
         mail = mailparser.parse_from_bytes(raw_email)  # parse email data
