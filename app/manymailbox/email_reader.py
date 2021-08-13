@@ -61,7 +61,7 @@ def parse_imap_mail_object(mailbox, mailbox_counter):
             pass
 
 
-def parse_pop_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter):
+def parse_pop_mail(mailcount, pop3server, emails_uidl, mailbox_counter):
     for i in range(mailcount):  # parse every email in box
         raw_email = b"\n".join(pop3server.retr(i + 1)[1])
         mail = mailparser.parse_from_bytes(raw_email)  # parse email data
