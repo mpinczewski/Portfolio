@@ -11,6 +11,7 @@ Błąd Pobierania
 <h4>Nie udało nam się połączyć z twoją skrzynką pocztową.</h4>
 </br>
 <h5>{{ user }}</h5>
+{% comment %} <h5>{{ id }}</h5> {% endcomment %}
 </br>
 Może to być spowodowane błędnie podanymi danymi logowania. 
 </br>
@@ -18,9 +19,13 @@ Spróbuj poporawić dane lub usuń te skrzynkę:
 <p>
 
 <section>
-    <button class="btn btn-primary" style="background-color: #e99245;" onclick="location.href='https://myaccount.google.com/intro/security'">
-        Ustawienia bezpieczeństwa Konta Google
-    </button>
+    <form action="/manymailbox/add-mailbox/{{ id }}/">
+        <input class="btn btn-primary" style="background-color: #e99245;width: 25%" type="submit" value="Popraw dane">
+    </form>
+    </br>
+    <form action="/manymailbox/delete-mailbox/{{ id }}/">
+        <input class="btn btn-primary" style="background-color: #e99245;width: 25%" type="submit" value="Usuń skrzynkę">
+    </form>
 </section>
 
 {% endblock %}

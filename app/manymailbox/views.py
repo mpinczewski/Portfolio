@@ -64,8 +64,10 @@ def all_emails(request):
 
 
 def login_errors(request, user):
-    
-    return render(request, "errors.html")
+    print(user)
+    obj = Mailbox.objects.get(email_user=user)
+    id = obj.id
+    return render(request, "errors.html", {"user": user, "id": id})
 
 
 def check_mailboxes(request):
@@ -99,14 +101,18 @@ def check_mailboxes(request):
                     pop3server
                 )  # Find Unique ID Listing
                 emails_uidl = bytes_emails_uidl[1]  # tuple of list -> list
-                parse_pop_mail_object(mailcount, pop3server, emails_uidl, mailbox_counter)
-                
+                parse_pop_mail_object(
+                    mailcount, pop3server, emails_uidl, mailbox_counter
+                )
+
             except TimeoutError:
                 return render(request, "errors.html", {"user": user})
             except error_proto:
-                return render(request, "errors.html", {"user": user})
+                print(user)
+                return login_errors(request, user)
+                # return render(request, "errors.html", {"user": user})
             except ConnectionRefusedError:
-                return render(request, "errors.html", {"user": user})    
+                return render(request, "errors.html", {"user": user})
         else:
             return render(request, "errors.html", {"user": user})
 

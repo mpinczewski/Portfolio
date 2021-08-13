@@ -1,5 +1,15 @@
 from django.urls import path
-from .views import access_denied, add_mailbox, all_mailboxes, delete_mailbox, edit_mailbox, all_emails, login_errors, send_emails, check_mailboxes
+from .views import (
+    access_denied,
+    add_mailbox,
+    all_mailboxes,
+    delete_mailbox,
+    edit_mailbox,
+    all_emails,
+    login_errors,
+    send_emails,
+    check_mailboxes,
+)
 
 app_name = "manymailbox"
 

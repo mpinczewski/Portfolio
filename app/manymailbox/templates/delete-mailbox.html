@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-Usuń Handlowca
+Usuń dane poczty email
 {% endblock %}
 
 {% get_current_language as LANGUAGE_CODE %}
@@ -13,17 +13,19 @@ Usuń Handlowca
 <section>
     <div class="row">
         <div class="col-md-6">
-            <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="users"></i> Usunicie skrzynki</h4> 
+            <h4 class="mb-3 mb-md-0"><i class="link-icon" data-feather="users"></i> Usunięcie skrzynki</h4> 
             </br>
             <h5 class="mb-3 mb-md-0">
-                UWAGA Jeśli nie masz zapisanych danych do konfiguracji skrzynki, stracisz je.
+                UWAGA Jeśli nie masz zapisanych danych 
+                </br>
+                do konfiguracji skrzynki, stracisz je.
             </br>
             </br>CZY CHCESZ KONTYNUOWAĆ?</h5>
                 <div class="card-body">
                     <div class="table-responsive">
                         <form method="post" novalidate>
                             {% csrf_token %}
-                            <button class="btn btn-primary" type="submit">Usuń skrzynkę</button>
+                            <button class="btn btn-primary" style="background-color: #e99245;width: 40%" type="submit">Usuń skrzynkę</button>
                         </form> 
                     </div>
                 </div>

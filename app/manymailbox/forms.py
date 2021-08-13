@@ -2,6 +2,7 @@ from django.forms import ModelForm
 
 from .models import Mailbox
 
+
 class MailboxForm(ModelForm):
     class Meta:
         model = Mailbox
