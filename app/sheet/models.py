@@ -38,6 +38,7 @@ class SalesManager(models.Model):
     id_number = models.PositiveIntegerField()
     is_active = models.BooleanField(default=True)
     photo = models.ImageField(upload_to="images", null=True, blank=True)
+    qr_code = models.ImageField(upload_to="qr_codes", null=True, blank=True)
 
     def __str__(self):
         return str(self.id_number)

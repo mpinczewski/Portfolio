@@ -2,6 +2,7 @@ from django.urls import path
 from .views import (
     add_sales_manager,
     all_traders,
+    create_qr_code,
     delete_sales_manager,
     edit_sales_manager,
     specific_trader,
@@ -31,4 +32,5 @@ urlpatterns = [
         delete_sales_manager,
         name="delete_sales_manager",
     ),
+    path("create-qrcode/", create_qr_code, name="create_qr_code"),
 ]

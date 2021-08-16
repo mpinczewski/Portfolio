@@ -1,5 +1,6 @@
 import re
 import csv
+import qrcode
 
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -164,3 +165,21 @@ def delete_sales_manager(request, id_number):
         return redirect("/sheet/all-traders/")
 
     return render(request, "delete-sales-manager.html", {"form": form})
+
+
+def create_qr_code(request):
+    all_selers = SalesManager.objects.all()
+    for seler in all_selers:
+        var = str(seler.id_number)
+        # img = qrcode.make("http://127.0.0.1:8000/sheet/submit/781450/")
+        # img.save("781450.jpg"),
+        # img = qrcode.make("https://gmp.solidsecurity.pl/handlowy/submit/564526/")
+        # img.save("564526.jpg")
+        adress = "https://gmp.solidsecurity.pl/handlowy/submit/"+var+"/"
+        img = qrcode.make(adress)
+        patch = "C:\\Users\\dobry\\VSCode\\portfolio\\app\\sheet\\qr_code\\"+var+".jpg"
+        img.save(patch)
+        update_seler = SalesManager.objects.filter(id=seler.id).update(qr_code=patch)
+        
+    
+    return render(request, "all-selers.html", {"test": all_selers})

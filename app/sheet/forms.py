@@ -23,6 +23,7 @@ class SalesManagerForm(ModelForm):
             "email",
             "is_active",
             "photo",
+            "qr_code",
         ]
         labels = {
             "first_name": "Imię",
@@ -35,4 +36,5 @@ class SalesManagerForm(ModelForm):
             "email": "Email pracownika",
             "is_active": "Czy aktywny",
             "photo": "Zdjęcie",
+            "qr_code": "Kod QR"
         }
