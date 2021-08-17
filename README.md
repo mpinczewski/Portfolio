@@ -15,3 +15,5 @@ Agregowane dane mogą być wykorzystwane n.p. do celów statystycznych i marketi
 - Obłsuga kodowania/dekodowania (`ISO-8859-2`,` ISO-8859-1`)
 - Zapisywanie maili jako obiektóww bazie danych.
 - Automatyczne przekazywanie zapisanych wiadomości na zdefiniowane adresy mailowe.
+
+### 
