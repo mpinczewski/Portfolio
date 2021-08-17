@@ -16,4 +16,9 @@ Agregowane dane mogą być wykorzystwane n.p. do celów statystycznych i marketi
 - Zapisywanie maili jako obiektóww bazie danych.
 - Automatyczne przekazywanie zapisanych wiadomości na zdefiniowane adresy mailowe.
 
-### 
+### Wymagane paczki
+
+- django
+- pillow
+- mail-parser
+- imap-tools
