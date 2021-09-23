@@ -13,7 +13,7 @@ Agregowane dane mogą być wykorzystwane n.p. do celów statystycznych i marketi
 - Odczyt ze skrzynek w standardzie `IMAP` oraz `POP`
 - Automatyczne parsowanie maili
 - Obłsuga kodowania/dekodowania (`ISO-8859-2`,` ISO-8859-1`)
-- Zapisywanie maili jako obiektóww bazie danych.
+- Zapisywanie maili jako obiektów bazie danych.
 - Automatyczne przekazywanie zapisanych wiadomości na zdefiniowane adresy mailowe.
 
 ### Wymagane paczki
